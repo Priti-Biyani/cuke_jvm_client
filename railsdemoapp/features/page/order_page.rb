@@ -31,8 +31,8 @@ end
  def get_order_id_from_url()
    $url= current_url
    $order_id=$url.split("/").last
-   $Response = "order_id :"+$order_id
-   puts "<TaaS Response Start>{order_id :"+$Response.to_json+"}<TaaS Response Complete>"
+   #$Response = "order_id :"+$order_id
+   puts "<TaaS Response Start>{\"order_id\":"+$order_id+"}<TaaS Response Complete>"
    # puts $Response.to_json
  end
 
