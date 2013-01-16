@@ -1,0 +1,35 @@
+<%= form_tag order_create_path, :method => 'post' do %>
+
+    <div class="well container">
+      <div class="brand well"><h1>Place your order...</h1></div>
+      <form class="form-horizontal">
+        <div class="control-group">
+          <%= label_tag "customer_name", nil, :class => "control-label" %>
+          <%= text_field_tag 'customer_name', nil, :class => "controls" %>
+        </div>
+
+        <div class="control-group">
+          <%= label_tag "item", nil, :class => "control-label" %>
+          <%= select_tag 'item_id', options_for_select(@items.collect { |item| [item.name, item.id] }), :class => "input-large shadow_select" %>
+        </div>
+        <div class="control-group">
+          <%= label_tag "quantity", nil, :class => "control-label" %>
+          <%= text_field_tag 'quantity', nil, :class => "controls" %>
+        </div>
+        <div class="control-group">
+          <%= label_tag "address", nil, :class => "control-label" %>
+          <%= text_area_tag 'address', nil, :class => "controls" %>
+        </div>
+
+        <%= submit_tag "Place Order", :class => "btn btn-primary" %>
+      </form>
+    </div>
+<% end %>
+
+<div class="navbar navbar-fixed-bottom">
+  <div class="navbar-inner">
+    <div class="container">
+      <div class="brand">Sample Rails App for demonstration purpose</div>
+    </div>
+  </div>
+</div>

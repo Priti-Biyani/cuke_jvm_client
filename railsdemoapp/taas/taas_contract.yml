@@ -1,0 +1,13 @@
+contracts:
+ place_order:
+  dir: "/Users/pranjali/code/railsdemoapp/taas"
+  command: "bundle exec cucumber ../features/order.feature"
+  input_param_format: "key=value"
+  input_params:
+   name:
+   address:
+   quantity:
+
+
+
+
