@@ -1,6 +1,6 @@
 contracts:
  place_order:
-  dir: "/Users/pranjali/code/gitpush/railsdemoapp/"
+  dir: "/home/sailee/taas_client/cuke_jvm_client/railsdemoapp"
   command: "bundle exec cucumber features/order.feature"
   input_param_format: "key=value"
   input_params:
@@ -8,6 +8,10 @@ contracts:
    address:
    quantity:
 
-
-
+verify_order:
+   dir: "/home/sailee/taas_client/cuke_jvm_client/railsdemoapp"
+   command: "bundle exec cucumber features/verify.feature"
+   input_param_format: "key=value"
+   input_params:
+   order_id:
 
