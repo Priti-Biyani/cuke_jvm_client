@@ -20,8 +20,8 @@ module Domain
 
 
  def verify_order_placed()
-  
-   assert status_message_is_displayed?(),"order not placed"
+
+   assert status_message_is_displayed?()
    #get_order_id_from_url()
 
  end

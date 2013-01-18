@@ -12,8 +12,7 @@ When /^I place an order$/ do
 end
 
 Then /^order should get placed successfully$/ do
-
- verify_order_placed()
+  verify_order_placed()
   get_orderid()
 end
 
