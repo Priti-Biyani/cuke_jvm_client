@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<testsuite failures="0" tests="1">
+<testcase classname="Place Order Online" name="place order" time="25.680738">
+<system-out><![CDATA[Given I visit the order merchant site and I place the order.........................................passed
+When I change the status from play.....................................................passed
+Then order status is changed at merchant site................................................passed
+]]></system-out>
+</testcase>
+</testsuite>
