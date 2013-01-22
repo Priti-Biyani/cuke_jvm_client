@@ -1,17 +1,17 @@
 contracts:
  place_order:
   dir: "/home/sailee/taas_client/cuke_jvm_client/railsdemoapp"
-  command: "bundle exec cucumber features/order.feature"
+  command: "bundle exec cucumber features/order.feature:4"
   input_param_format: "key=value"
   input_params:
    name:
    address:
    quantity:
 
-verify_order:
-   dir: "/home/sailee/taas_client/cuke_jvm_client/railsdemoapp"
-   command: "bundle exec cucumber features/verify.feature"
-   input_param_format: "key=value"
-   input_params:
+ verify_order:
+  dir: "/home/sailee/taas_client/cuke_jvm_client/railsdemoapp"
+  command: "bundle exec cucumber features/order.feature:9"
+  input_param_format: "key=value"
+  input_params:
    order_id:
 
