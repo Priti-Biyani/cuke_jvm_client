@@ -9,43 +9,25 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 
-/**
- * Created with IntelliJ IDEA.
- * User: priti
- * Date: 17/01/13
- * Time: 6:41 PM
- * To change this template use File | Settings | File Templates.
- */
-public class TaasClient {
+public class TaasClient
+{
 
     URL url;
     HttpURLConnection connection;
     String json_output,output;
     HashMap retMap;
 
-    public void TaasClient()
+    public  TaasClient()
     {
-          System.out.println("IN CONSTRUCT");
     }
 
 
-    public void initialize_client(String req_url)
+    public HashMap make_request(String request,String params)
     {
         try
         {
-            System.out.println("URL :"+this.url);
-            this.url = new URL(req_url);
-        }
-        catch(Exception ex)
-        {
-            ex.getStackTrace();
-        }
-    }
-
-    public HashMap make_request(String params)
-    {
-        try
-        {
+            this.url=new URL(request);
+            System.out.println(url);
             connection =(HttpURLConnection)url.openConnection();
 
             if(connection!=null)
@@ -58,11 +40,12 @@ public class TaasClient {
                 connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
                 connection.setRequestProperty("charset", "utf-8");
                 connection.setRequestProperty("Content-Length", "" + Integer.toString(params.getBytes("UTF-8").length));
-
                 DataOutputStream wr = new DataOutputStream(connection.getOutputStream ());
                 wr.writeBytes(params);
+
                 wr.flush();
                 wr.close();
+                System.out.println("********REQUEST DONE    ");
             }
         }
         catch(Exception ex)
@@ -70,25 +53,21 @@ public class TaasClient {
             ex.printStackTrace();
             ex.getMessage();
         }
-        return retMap=parse_output();
+        retMap=parse_output();
+        return retMap;
     }
 
-
-
-    public static TaasClient create_client(String URL)
-    {
-        TaasClient client=new TaasClient();
-        client.initialize_client(URL+"/contract");
-        return client;
-    }
-    public HashMap parse_output()
+    private HashMap parse_output()
     {
         try
         {
+            System.out.println("***********PARSE OUTPUT");
+            System.out.println("URL :"+this.connection);
+
             StringBuffer resp =new StringBuffer();
             InputStream is = new DataInputStream(connection.getInputStream());
             BufferedReader br =new BufferedReader(new InputStreamReader(is));
-            System.out.print("RESPONSE : \n \n");
+            System.out.print("*****************RESPONSE : \n \n");
             String line;
             while((line=br.readLine())!=null)
             {
@@ -96,29 +75,12 @@ public class TaasClient {
                 resp.append("\r");
             }
             br.close();
-
             this.json_output= Jsoup.parse(resp.toString()).select("TaaS-Json").first().text();
             this.output = Jsoup.parse(resp.toString()).select("TaaS-Output").first().text();
             System.out.println("JSON OUTPUT : "+json_output+"\n");
             System.out.println("     OUTPUT : "+output);
 
             convertToMap(json_output);
-            System.out.println("HASH MAP :"+this.retMap);
-//            Object v;
-            String key="\"order_id\"";
-            boolean has=retMap.containsKey(key);
-            System.out.println(has);
-            Integer v = (Integer)retMap.get(key);
-            System.out.println("order_id  :"+v);
-
-            Set keys = retMap.keySet();
-            System.out.println(keys);
-            for (Iterator i = keys.iterator(); i.hasNext();)
-            {
-                String k = (String) i.next();
-                Integer value = (Integer) retMap.get(k);
-                System.out.println(k + " = " + value);
-            }
 
         }
         catch(Exception ex)
@@ -144,8 +106,41 @@ public class TaasClient {
         System.out.println("FIRST  :"+splitFirstValue);
         System.out.println("LAST   :"+splitSeconSValue);
         retMap.put(splitFirstValue.toString(), Integer.parseInt(splitSeconSValue));
-
     }
 
+
+    public static void main(String arg[])
+    {
+        String request="http://10.12.7.14:4567/contract";
+        String param="contract_name=place_order&name=priti&address=add&quantity=2";
+        TaasClient client1=new TaasClient();
+        HashMap output =client1.make_request(request,param);
+        System.out.println(output);
+    }
+
+    /*
+        /*
+            This code will be used to get value from hashmap
+
+        */
+
+        /*
+            System.out.println("HASH MAP :"+this.retMap);
+            Object v;
+            String key="\"order_id\"";
+            boolean has=retMap.containsKey(key);
+            System.out.println(has);
+            Integer v = (Integer)retMap.get(key);
+            System.out.println("order_id  :"+v);
+
+            Set keys = retMap.keySet();
+            System.out.println(keys);
+            for (Iterator i = keys.iterator(); i.hasNext();)
+            {
+                String k = (String) i.next();
+                Integer value = (Integer) retMap.get(k);
+                System.out.println(k + " = " + value);
+            }
+          */
 
 }
