@@ -9,5 +9,5 @@ Feature: place order online
   @javascript
   Scenario: verify order
     Given I visit the order status page
-    Then I should see order delivered status
+    Then I should view order delivered status
 

@@ -1,10 +1,15 @@
+module Page
+  module PageOrder
 
-def status_updated?()
+  def navigate_to_url(order_id)
+      visit "http://localhost:3000/order/display/"+order_id
+  end
+
+  def status_updated?()
   page.has_content?("Delivered")
+  end
+
+  end
 end
 
-def navigate_to_display(url)
-
-  visit url
-
-end
+World(Page::PageOrder)

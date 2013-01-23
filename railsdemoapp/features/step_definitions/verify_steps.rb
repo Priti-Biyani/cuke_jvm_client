@@ -1,11 +1,9 @@
 Given /^I visit the order status page$/ do
-  $order_id=ENV["order_id"]
-  puts $order_id
-  visit "http://localhost:3000/order/display/"+$order_id
+ navigate_to_url(ENV["order_id"])
 end
 
 
-xThen /^I should see order delivered status$/ do
-  verify_order_delivered()
+Then /^I should view order delivered status$/ do
+  assert_order_delivered()
 end
 

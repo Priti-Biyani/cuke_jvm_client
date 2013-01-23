@@ -1,36 +1,22 @@
-
 module Domain
-
  module CukeOrder
 
-
- def navigate_to_homepage(url)
-
-  navigate_to_url(url)
-
+ def navigate_to_homepage()
+  navigate_to_merchant_site()
  end
 
-
-
  def place_an_order(name,quantity,address)
-   
   fill_form(name,quantity,address)
   submit_form()
  end
 
-
- def verify_order_placed()
-
+ def assert_order_placed()
    assert status_message_is_displayed?()
-   #get_order_id_from_url()
-
  end
 
- def get_orderid()
+ def get_order_id()
    get_order_id_from_url()
  end
-
-
 
  end
 end

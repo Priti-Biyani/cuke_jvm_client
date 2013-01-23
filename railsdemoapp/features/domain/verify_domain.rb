@@ -1,11 +1,12 @@
 module Domain
-
   module Cuke
 
+    def navigate_to_url(order_id)
+    puts order_id
+    end
 
-    def verify_order_delivered()
+    def assert_order_delivered()
       assert status_updated?(),"Delivered"
-
     end
 
   end
